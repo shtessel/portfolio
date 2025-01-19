@@ -31,7 +31,7 @@ SELECT
          WHEN DATE_PART('month', date) = 8 THEN 'August'
     END as month,
     warehouse,
-    ROUND(CAST(SUM(total * (1 - payment_fee)) AS NUMERIC), 2) AS net_revenue
+    SUM (total) - SUM (payment_fee) AS net_revenue
 FROM public.moto_sales
 WHERE client_type = 'Wholesale'
 GROUP BY product_line, warehouse, month
